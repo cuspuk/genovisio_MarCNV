@@ -3,7 +3,7 @@ import json
 import math
 import typing
 
-from src.acmg.helpers import (both_types_cnv, get_overlap, is_duplication, is_overlapping, OverlapTypeEnum,
+from marcnv.src.acmg.helpers import (both_types_cnv, get_overlap, is_duplication, is_overlapping, OverlapTypeEnum,
                               return_dict, RiskEnum, SeverityValuesEnum, sufficient_HI_TS_scores)
 
 

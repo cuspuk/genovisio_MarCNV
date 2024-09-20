@@ -6,8 +6,8 @@ import typing
 
 import pymongo
 
-from src.acmg.acmg_classify import evaluate_from_dict
-from src.mongo import get_mongo_database
+from marcnv.src.acmg.acmg_classify import evaluate_from_dict
+from marcnv.src.mongo import get_mongo_database
 
 # define allowed chromosomes
 allowed_chromosomes = [f'chr{chr_id}' for chr_id in list(range(1, 23)) + ['X', 'Y']]
@@ -45,7 +45,7 @@ def find_intersections(collection: pymongo.collection.Collection, search_params:
     return list(collection.find(query))
 
 
-if __name__ == '__main__':
+def main():
     # Set up argument parsing
     parser = argparse.ArgumentParser(description='Classify CNV and/or find intersecting items in MongoDB collections.')
     parser.add_argument('input', help='Input string in the form "chr1:10000-20000/del". CNV type should be del/dup/loss/gain.')
@@ -81,3 +81,7 @@ if __name__ == '__main__':
     # Classify?
     if not args.skip_classification:
         print(json.dumps(evaluate_from_dict(data_dict), default=str, indent=4))
+
+
+if __name__ == '__main__':
+    main()

@@ -5,10 +5,10 @@ import time
 
 import pandas as pd
 
-from classify_cnv import find_intersections, allowed_chromosomes
-from src.acmg.acmg_classify import evaluate_from_dict
-from src.acmg.helpers import is_duplication
-from src.mongo import get_mongo_database
+from .classify_cnv import find_intersections, allowed_chromosomes
+from marcnv.src.acmg.acmg_classify import evaluate_from_dict
+from marcnv.src.acmg.helpers import is_duplication
+from marcnv.src.mongo import get_mongo_database
 
 # Global variable to store the start time
 _start_time = None
@@ -51,7 +51,7 @@ def progress_bar(iteration: int, total: int, prefix: str = 'Annotating: ', suffi
         print()
 
 
-if __name__ == '__main__':
+def main():
     # Set up argument parsing
     parser = argparse.ArgumentParser(description='Classify CNV in a batch mode.')
     parser.add_argument('input', help='A .tsv file with input CNVs.')
@@ -146,3 +146,7 @@ if __name__ == '__main__':
 
     # Finally output the updated table
     input_table.to_csv(args.output, sep='\t', index=False)
+
+
+if __name__ == '__main__':
+    main()
