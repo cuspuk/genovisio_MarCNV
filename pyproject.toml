@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "marcnv"
+version = "0.2.0"
+description = "Automatic evaluation of ACMG criteria for CNV"
+authors = ["Marcel Kucharik <marcel.kucharik@geneton.sk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+pandas = ">=2.2"
+pymongo = "==4.8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
