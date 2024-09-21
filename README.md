@@ -1,41 +1,41 @@
 # Genovisio MarCNV
 
+[![Python version](https://img.shields.io/badge/python-3.12+-green.svg)](https://www.python.org/downloads/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+
 Automatic evaluation of ACMG criteria for CNV based on .json file with data from MongoDB.
 
 ## Installation
 
-Create conda repository with all necessary packages:
+In python3.12 you can simply use pip to install marCNV:
 
 ```bash
-mamba env create -n genovisio_marcnv -f conda_env.yaml
+pip install git+https://github.com/cuspuk/genovisio_MarCNV.git
 ```
 
-### Run mongo
-
-MongoDB should be running before you run the MarCNV:
+Without python3.12, you can install marcnv using mamba:
 
 ```bash
-conda activate genovisio_marcnv
-mongod --dbpath <dbpath_dirname>
+mamba env create -f marcnv.yaml
 ```
 
-Where `<dbpath_dirname>` should be an existing directory filled with databases using the
-repository [genovisio_sources](ttps://github.com/marcelTBI/genovisio_sources).
+This gives you 2 entrypoints:
 
-## Running the annotation
+- `marcnv-batch` - running marCNV in batch-processing mode
+- `marcnv-single` - running marCNV in single CNV processing mode
 
-Activate the conda environment:
+## Running
 
-```bash
-conda activate genovisio_marcnv
-```
+To run marCNV, running instance of mongo database is required. Mongo URI and database name can be supplied to the entrypoint commands, see `--help`. Default MongoDB URI is `mongodb://localhost:27017/` and the database name 'genovisio'.
+
+To run marCNV, call one of entrypoint commands (if installed using conda, activate it first).
 
 ### Annotation of a single CNV
 
-Run classification script to classify your target CNV (in this case `chr16:34289161-34490212/loss`):
+To classify your target CNV (in this case `chr16:34289161-34490212/loss`) run:
 
 ```bash
-python classify_cnv.py chr16:34289161-34490212/loss 
+python classify_cnv.py chr16:34289161-34490212/loss
 ```
 
 The same script with flag `-j` can output json file with all needed data for classification.
