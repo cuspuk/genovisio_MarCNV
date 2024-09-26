@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/cuspuk/genovisio_MarCNV/compare/v0.1.0...v0.1.1) (2024-09-26)
+
+
+### Documentation
+
+* updated README with development section ([dda76d7](https://github.com/cuspuk/genovisio_MarCNV/commit/dda76d7dbe2a5c6be196362dc5e7ad5816624be8))
+
 ## 0.1.0 (2024-09-21)
 
 
