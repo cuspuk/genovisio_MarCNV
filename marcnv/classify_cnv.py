@@ -8,6 +8,7 @@ import pymongo
 
 from marcnv.src.acmg.acmg_classify import evaluate_from_dict
 from marcnv.src.mongo import get_mongo_database
+from marcnv.src.cytobands import cytobands
 
 # define allowed chromosomes
 allowed_chromosomes = [f'chr{chr_id}' for chr_id in list(range(1, 23)) + ['X', 'Y']]
@@ -57,7 +58,10 @@ def main():
     args = parser.parse_args()
 
     # Parse the input string
-    search_params = parse_input(args.input)
+    search_params: dict[str, str | int | list] = parse_input(args.input)
+    search_params['cytobands'] = cytobands.cytobands_list(search_params['chromosome'], search_params['start'], search_params['end'])
+    search_params['cytobands_desc'] = cytobands.cytobands_desc(search_params['chromosome'], search_params['start'], search_params['end'])
+
 
     # MongoDB connection
     db = get_mongo_database(args.mongodb_uri, args.db_name)
@@ -70,13 +74,12 @@ def main():
 
     # Convert the results to JSON format (add cnv info to beginning)
     data_dict = {'cnv': search_params, **results}
-    results_json = json.dumps(data_dict, default=str, indent=4)
 
     # Write into a file?
     if args.json_output is not None:
         with (gzip.open(args.json_output, 'wt', encoding='utf-8') if args.json_output.endswith('.gz') else
               open(args.json_output, 'w', encoding='utf-8') as f):
-            f.write(results_json)
+            f.write(json.dumps(data_dict, default=str, indent=4))
 
     # Classify?
     if not args.skip_classification:
