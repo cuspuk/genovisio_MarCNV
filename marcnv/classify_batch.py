@@ -8,6 +8,7 @@ import pandas as pd
 from .classify_cnv import find_intersections, allowed_chromosomes
 from marcnv.src.acmg.acmg_classify import evaluate_from_dict
 from marcnv.src.acmg.helpers import is_duplication
+from marcnv.src.cytobands import cytobands
 from marcnv.src.mongo import get_mongo_database
 
 # Global variable to store the start time
@@ -91,6 +92,8 @@ def main():
     for i, row in input_table.iloc[args.skip:args.skip + args.limit].iterrows():
         # Get CNV params
         cnv_params = {k: v for k, v in row.items() if k in ['chromosome', 'start', 'end', 'cnv_type']}
+        cnv_params['cytobands'] = cytobands.cytobands_list(cnv_params['chromosome'], cnv_params['start'], cnv_params['end'])
+        cnv_params['cytobands_desc'] = cytobands.cytobands_desc(cnv_params['chromosome'], cnv_params['start'], cnv_params['end'])
 
         # Print what is being evaluated
         if args.verbose:

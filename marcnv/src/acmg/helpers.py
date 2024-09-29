@@ -243,16 +243,20 @@ def return_dict(section: str, option: str, reason: str, duplication: bool) -> di
     """
     # Get info about criteria
     score = 0
+    evidence = ''
     if option != '':
-        # get proper text
+        # get proper option dict
         texts = get_acmg_criteria(duplication)
         acmg_option = texts[int(option[:1])][option]
-        # extract score
+
+        # extract score, evidence name
         score = None if acmg_option['Suggested points'] is None or math.isnan(acmg_option['Suggested points']) else acmg_option['Suggested points']
+        evidence = acmg_option['Evidence']
     # return dictionary
     return {
         'section': section,
         'option': option,
         'score': score,
-        'reason': reason
+        'reason': reason,
+        'evidence': evidence,
     }
