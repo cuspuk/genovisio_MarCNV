@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/cuspuk/genovisio_MarCNV/compare/v0.1.1...v0.2.0) (2024-09-29)
+
+
+### Features
+
+* added cytobands to annotation, added Evidence to output ([48e5315](https://github.com/cuspuk/genovisio_MarCNV/commit/48e5315f4a24fed8ccd439f35c28cd67cfe323ec))
+
 ## [0.1.1](https://github.com/cuspuk/genovisio_MarCNV/compare/v0.1.0...v0.1.1) (2024-09-26)
 
 
